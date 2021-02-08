@@ -220,6 +220,15 @@ public extension Media.Content {
         default: return []
         }
     }
+    
+    var resources: [[Media.Version]] {
+        switch self {
+        case .picture(let picture): return [picture.versions]
+        case .video(let video): return [video.versions]
+        case .album(let album): return album.compactMap { $0.resources.first }
+        default: return []
+        }
+    }
 }
 
 /// `[[Version]]` accessories.
